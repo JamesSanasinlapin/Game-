@@ -45,10 +45,6 @@ window.onload = function() {
 
     context = board.getContext("2d");///used for drawing on the board 
 
-    //draw initial singel 
-    //context.fillStyle="green";
-    // context.fillRect(snigel.x, snigel.y, snigel.width, snigel.height);
-
    snigelImg = new Image();
    snigelImg.src = "C:/Users/sanas/OneDrive/Desktop/ling_ling/img/snail_00.png"; 
    snigelImg.onload = function() { 
@@ -123,7 +119,7 @@ function placeStaket() {
 
     let placeStaketChance = Math.random(); //0 - 0.9999...
 
-    if (placeStaketChance > 1) { //10% you get cactus3
+    if (placeStaketChance > 1) { 
         staket.img = staketImg;
         staket.width = staketWidth;
         staketArray.push(staket);
