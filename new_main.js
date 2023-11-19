@@ -2,25 +2,25 @@
 let board;
 let boardWidth = 750;
 let boardHeight = 250;
-let context; 
+let context;
 
-//singel 
+//singel
 let snigelWidth = 88;
-let snigelHeight = 94; 
+let snigelHeight = 94;
 let snigelX = 50;
 let snigelY = boardHeight - snigelHeight;
 let snigelImg;
 
 
-let snigel = { 
-    x : snigelX,
-    y : snigelY,
-    width : snigelWidth,
-    height : snigelHeight    
+let snigel = {
+    x: snigelX,
+    y: snigelY,
+    width: snigelWidth,
+    height: snigelHeight
 }
 
 //staket
-let staketArray=[];
+let staketArray = [];
 
 let staketWidth = 34;
 
@@ -38,29 +38,29 @@ let gravity = .4;
 let gameOver = false
 let score = 0;
 
-window.onload = function() {
+window.onload = function () {
     board = document.getElementById("board");
     board.height = boardHeight;
     board.width = boardWidth;
 
-    context = board.getContext("2d");///used for drawing on the board 
+    context = board.getContext("2d");///used for drawing on the board
 
-   snigelImg = new Image();
-   snigelImg.src = "C:/Users/sanas/OneDrive/Desktop/ling_ling/img/snail_00.png"; 
-   snigelImg.onload = function() { 
-       context.drawImage(snigelImg, snigel.x, snigel.y, snigel.width, snigel.height);
-   }
-   staketImg = new Image();
-   staketImg.src ="C:/Users/sanas/OneDrive/Desktop/ling_ling/img/snigel-wood-fence.png";
+    snigelImg = new Image();
+    snigelImg.src = "C:/Users/sanas/OneDrive/Desktop/ling_ling/img/snail_00.png";
+    snigelImg.onload = function () {
+        context.drawImage(snigelImg, snigel.x, snigel.y, snigel.width, snigel.height);
+    }
+    staketImg = new Image();
+    staketImg.src = "C:/Users/sanas/OneDrive/Desktop/ling_ling/img/snigel-wood-fence.png";
 
-   requestAnimationFrame(update);
-   setInterval(placeStaket, 1000);
-   document.addEventListener("keydown", moveSnigel);
+    requestAnimationFrame(update);
+    setInterval(placeStaket, 1000);
+    document.addEventListener("keydown", moveSnigel);
 }
 
 function update() {
     requestAnimationFrame(update);
-    if (gameOver){
+    if (gameOver) {
         return;
     }
     context.clearRect(0, 0, board.Width, board.Height);
@@ -75,31 +75,31 @@ function update() {
         let staket = staketArray[i];
         staket.x += velocityX;
         context.drawImage(staket.img, staket.x, staket.y, staket.width, staket.height);
-         
+
         if (detectCollision(snigel, staket)) {
             gameOver = true;
             snigelImg.src = "C:/Users/sanas/OneDrive/Desktop/ling_ling/img/snail_00.png";
-            snigelImg.onload = function(){
+            snigelImg.onload = function () {
                 context.drawImage(snigelImg, snigel.x, snigel.y, snigel.width, snigel.height);
             }
         }
     }
-    //score 
-    context.fillStyle="black";
-    context.font="20px coourier";
+    //score
+    context.fillStyle = "black";
+    context.font = "20px coourier";
     score++;
     context.fillText(score, 5, 20);
 }
-function rorsnigel(e){
-    if (gameOver){
+function rorsnigel(e) {
+    if (gameOver) {
         return;
     }
     if ((e.code == "Space" || e.code == "ArrowUp") && snigel.y == snigelY) {
         //
         velocityY = -10;
     }
-    else if (e.code == "ArrowDown" && snigel.y == snigelY){
-        //duck 
+    else if (e.code == "ArrowDown" && snigel.y == snigelY) {
+        //duck
     }
 
 }
@@ -110,16 +110,16 @@ function placeStaket() {
 
     //place cactus
     let staket = {
-        img : null,
-        x : staketX,
-        y : staketY,
-        width : null,
+        img: null,
+        x: staketX,
+        y: staketY,
+        width: null,
         height: staketHeight
     }
 
     let placeStaketChance = Math.random(); //0 - 0.9999...
 
-    if (placeStaketChance > 1) { 
+    if (placeStaketChance > 1) {
         staket.img = staketImg;
         staket.width = staketWidth;
         staketArray.push(staket);
@@ -132,8 +132,8 @@ function placeStaket() {
 
 function detectCollision(a, b) {
     return a.x < b.x + b.width &&   //a's top left corner doesn't reach b's top right corner
-           a.x + a.width > b.x &&   //a's top right corner passes b's top left corner
-           a.y < b.y + b.height &&  //a's top left corner doesn't reach b's bottom left corner
-           a.y + a.height > b.y;    //a's bottom left corner passes b's top left corner
-         
+        a.x + a.width > b.x &&   //a's top right corner passes b's top left corner
+        a.y < b.y + b.height &&  //a's top left corner doesn't reach b's bottom left corner
+        a.y + a.height > b.y;    //a's bottom left corner passes b's top left corner
+
 }
