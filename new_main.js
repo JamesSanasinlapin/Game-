@@ -39,6 +39,7 @@ let gameOver = false
 let score = 0;
 
 window.onload = function () {
+    var moveSnigel;
     board = document.getElementById("board");
     board.height = boardHeight;
     board.width = boardWidth;
@@ -46,12 +47,12 @@ window.onload = function () {
     context = board.getContext("2d");///used for drawing on the board
 
     snigelImg = new Image();
-    snigelImg.src = "C:/Users/sanas/OneDrive/Desktop/ling_ling/img/snail_00.png";
+    snigelImg.src = "img/snail_00.png";
     snigelImg.onload = function () {
         context.drawImage(snigelImg, snigel.x, snigel.y, snigel.width, snigel.height);
     }
     staketImg = new Image();
-    staketImg.src = "C:/Users/sanas/OneDrive/Desktop/ling_ling/img/snigel-wood-fence.png";
+    staketImg.src = "img/snigel-wood-fence.png";
 
     requestAnimationFrame(update);
     setInterval(placeStaket, 1000);
@@ -78,7 +79,7 @@ function update() {
 
         if (detectCollision(snigel, staket)) {
             gameOver = true;
-            snigelImg.src = "C:/Users/sanas/OneDrive/Desktop/ling_ling/img/snail_00.png";
+            snigelImg.src = "img/snail_00.png";
             snigelImg.onload = function () {
                 context.drawImage(snigelImg, snigel.x, snigel.y, snigel.width, snigel.height);
             }
@@ -87,7 +88,7 @@ function update() {
     //score
     context.fillStyle = "black";
     context.font = "20px coourier";
-    score++;
+    score;
     context.fillText(score, 5, 20);
 }
 function rorsnigel(e) {
