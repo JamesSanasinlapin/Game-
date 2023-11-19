@@ -91,7 +91,7 @@ function update() {
     score;
     context.fillText(score, 5, 20);
 }
-function rorsnigel(e) {
+document.addEventListener('keydown', function rorsnigle(e) {
     if (gameOver) {
         return;
     }
@@ -103,7 +103,7 @@ function rorsnigel(e) {
         //duck
     }
 
-}
+});
 function placeStaket() {
     if (gameOver) {
         return;
